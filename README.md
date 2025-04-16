@@ -1,142 +1,73 @@
 # BHUB Project
 
-Welcome to the BHUB project! This is a PHP and MySQL–based web application that provides features such as user registration, login, chat, book listings, payments, and administrative functionality. The project includes multiple modules (admin, author, books, chat, payments, registration, etc.) and a pre-built database schema.
-
-## Site is Live Here [Redirect to bhub](https://bhub.fwh.is/ "redirect to bhub").
-## Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Installation](#installation)
-  - [Prerequisites](#prerequisites)
-  - [File Structure](#file-structure)
-  - [Database Setup](#database-setup)
-  - [Configuration](#configuration)
-- [Deployment](#deployment)
-- [Support](#support)
-- [License](#license)
+BHUB is a PHP and MySQL web application built for managing books, user reviews, and book recommendations. This project is ideal for local development using XAMPP—a popular, easy-to-install package for running Apache, PHP, and MySQL on your computer.
 
 ## Overview
 
-BHUB is a modular PHP web application with the following components:
-- **User Management:** Registration, login, password reset, and user profile.
-- **Chat Module:** Real-time chat functionality.
-- **Book Listings:** Display, review, and purchase books.
-- **Payments Module:** Process payment information and view payment histories.
-- **Admin Dashboard:** Back-end management (dashboard, reports, and user monitoring).
+BHUB provides a complete workflow for a book recommendation platform where users can:
+- **Register and Login:** Create an account and securely log in.
+- **Browse Books:** View both purchasable and free (non-purchasable) books.
+- **Purchase Books:** Complete a purchase process if the book is marked as purchasable.
+- **Review Books:** Submit reviews for books, contributing to recommendations.
+- **Filter Books:** Easily filter and search for books by different genres.
 
-The project uses a MySQL database for storing application data. The database schema is included in the `bhub.sql` file.
+## Using XAMPP for Local Development
 
-## Features
+XAMPP is an all-in-one solution for setting up a local web server environment. To use XAMPP with the BHUB project:
 
-- **Modular Design:** Separate modules for admin, chat, books, payments, registration, and more.
-- **Responsive Design:** Layouts and templates that work on desktop and mobile.
-- **File-Based Templating:** Includes header, footer, and common files for consistent look and feel.
-- **Database Driven:** MySQL is used to store all application data.
-- **Free Hosting Ready:** Designed to run on free hosting solutions like InfinityFree.
+1. **Download and Install XAMPP:**  
+   Download XAMPP from the [official website](https://www.apachefriends.org/) and follow the installation instructions for your operating system.
 
-## Installation
+2. **Place the Project Files:**  
+   - Extract your project folder (e.g., the `bhub` folder) into the `htdocs` directory within your XAMPP installation directory.
+   - Ensure that your main application file is named `index.php` to load automatically when you browse to `http://localhost/yourprojectfolder`.
 
-### Prerequisites
+3. **Start Apache and MySQL:**  
+   Open the XAMPP Control Panel and start the Apache and MySQL services.  
+   - Your PHP application will be accessible via a web browser at `http://localhost/yourprojectfolder`.
 
-Before deploying the project, ensure you have:
-- A PHP-enabled web server (InfinityFree provides free hosting with PHP support).
-- MySQL database support.
-- An FTP client (e.g., FileZilla) or access to the InfinityFree file manager.
-- phpMyAdmin access to import the database.
+4. **Configure Your Database (Locally):**  
+   - Use phpMyAdmin (accessed via `http://localhost/phpmyadmin`) to import your project’s database dump if necessary.
+   - Ensure that your `connection.php` file is configured to point to your local MySQL credentials.
 
-### File Structure
+## User Workflow
 
-After extracting the ZIP file, your project structure should look similar to:
+The BHUB project includes the following key user workflows:
 
+1. **User Registration:**  
+   - Navigate to the **register.php** page.
+   - Fill in your personal details (name, email, password, etc.) and submit the registration form.
+   - An account is created, and you can then log in.
 
-### Database Setup
+2. **User Login:**  
+   - Go to **login.php**.
+   - Enter your registered email and password.
+   - On successful authentication, you’ll be redirected to the user dashboard.
 
-1. **Create a MySQL Database:**
-   - Log in to your InfinityFree control panel.
-   - Navigate to the “MySQL Databases” section.
-   - Create a new database (e.g., `if0_38761672_bhub`).
-   - Note down your Database Host (e.g., `sql102.infinityfree.com`), Database Name, Username, and Password.
+3. **Browsing Books:**  
+   - After logging in, users can view a list of available books on the homepage (or a dedicated books page).
+   - Books are categorized as either purchasable or free.  
+     - **Purchasable Books:** These include options for users to purchase the book.
+     - **Non-Purchasable (Free) Books:** These are available at no cost.
 
-2. **Import the Database Dump:**
-   - Open **phpMyAdmin** from the InfinityFree control panel.
-   - Select the database you just created.
-   - Click on the **Import** tab.
-   - Choose the `bhub.sql` file from your local machine.
-   - Click **Go** to execute the import. You should see a success message, and the tables will appear under the database.
+4. **Purchasing Books:**  
+   - When selecting a purchasable book, follow the on-screen instructions to complete the purchase (e.g., providing payment details).
+   - If a book is free, simply click on the “Get for Free” button to access the content.
 
-### Configuration
+5. **Reviewing Books:**  
+   - For each book recommendation, users can submit a review through the **review.php** page.
+   - The review form allows users to rate the book and add comments.
+   - Reviews help improve the recommendation engine and inform other users.
 
-1. **Database Connection:**
-   - Open the `connection.php` file in your project’s root.
-   - Update the MySQL credentials to match your InfinityFree configuration. For example:
-     ```php
-     <?php
-     $con = mysqli_connect(
-         'sql102.infinityfree.com',   // MySQL Host (check your InfinityFree details)
-         'if0_38761672',              // Your Database Username (provided by InfinityFree)
-         'your_password_here',        // Your Database Password
-         'if0_38761672_bhub'          // Your Database Name
-     );
-     if (!$con) {
-         die("Connection failed: " . mysqli_connect_error());
-     }
-     ?>
-     ```
-2. **Other Configuration Files:**
-   - Ensure that your configuration files (e.g., `.htaccess` or any environment-specific settings) are updated to reflect the production settings, such as domain name and file paths.
-
-## Deployment
-
-1. **Upload Your Project Files:**
-   - Use an FTP client (e.g., FileZilla) or the InfinityFree File Manager to upload all files inside the `bhub/` folder to the `htdocs` directory on your InfinityFree account.
-   - Ensure that the main file `index.php` is in the root of `htdocs`.
-
-2. **Verify the Website:**
-   - Visit your free domain (e.g., `https://bhub.fwh.is/`) to ensure your PHP application loads.
-   - Test key functionalities (e.g., user registration, login, chat, book listings) to confirm everything is working.
-
-## Post-Deployment Checklist
-
-Now that your site is live, here are some additional tips to ensure a smooth and secure experience:
-
-- **Mobile Compatibility & HTTPS:**
-  - Verify that your site is accessible on mobile devices. If browsers show “Not Secure,” ensure your SSL certificate is correctly installed.
-  - If needed, set up an `.htaccess` redirect to force HTTPS:
-    ```apache
-    RewriteEngine On
-    RewriteCond %{HTTPS} off
-    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-    ```
-
-- **Performance Optimization:**
-  - Consider caching and minifying your CSS and JavaScript files.
-  - Optimize images and enable compression on your web server if possible.
-
-- **Backup & Monitoring:**
-  - Regularly back up your database using phpMyAdmin’s export feature.
-  - Keep a local copy of your project files.
-  - Use free online services to monitor your site’s uptime and performance if available.
-
-## Support
-
-If you encounter any issues:
-- Refer to InfinityFree’s documentation and forums.
-- Check error logs via the control panel to help diagnose problems.
-- Open an issue on the project’s repository with detailed information.
+6. **Filtering by Genre:**  
+   - Users can filter books by genre using the built-in filtering feature.
+   - This allows quick navigation through various categories such as Fiction, Non-Fiction, Science, History, etc.
+   - The filter options are available on the book listings page to help users find books that match their interests.
 
 ## License
 
-This project is licensed under the MIT License. (Feel free to replace with your preferred license.)
+## License
 
----
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-*Happy coding and deploying!*
-
-
-This project is licensed under the MIT License (or include your preferred license here).
-
----
-
-*Happy coding and deployment!*
 
